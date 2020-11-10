@@ -1,0 +1,17 @@
+### Happy Path
+
+POST http://localhost:8080/api/slow
+Content-Type: application/json
+
+{
+  "timeout": 3000
+}
+
+### Sad Path
+
+POST http://localhost:8080/api/slow
+Content-Type: application/json
+
+{
+  "timeout": 6000
+}
