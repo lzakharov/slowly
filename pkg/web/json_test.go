@@ -1,5 +1,3 @@
-// +build unit
-
 package web
 
 import (
@@ -55,22 +53,32 @@ func TestWriteJSON(t *testing.T) {
 		},
 		{
 			name:   "nil",
-			status: http.StatusOK,
+			status: http.StatusAccepted,
 			v:      nil,
 			want: want{
-				status:      http.StatusOK,
+				status:      http.StatusAccepted,
 				contentType: "application/json",
 				data:        `null`,
 			},
 		},
 		{
 			name:   "map",
-			status: http.StatusOK,
+			status: http.StatusBadRequest,
 			v:      map[string]interface{}{"n": 42},
 			want: want{
-				status:      http.StatusOK,
+				status:      http.StatusBadRequest,
 				contentType: "application/json",
 				data:        `{"n":42}`,
+			},
+		},
+		{
+			name:   "unsupported complex number",
+			status: http.StatusBadRequest,
+			v:      1 + 2i,
+			want: want{
+				status:      http.StatusInternalServerError,
+				contentType: "text/plain; charset=utf-8",
+				data:        "json: unsupported type: complex128\n",
 			},
 		},
 	}
