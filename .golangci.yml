@@ -1,0 +1,290 @@
+run:
+  concurrency: 4 # available CPU number
+  timeout: 5m # timeout for analysis
+  issues-exit-code: 1 # exit code when issue was found
+  build-tags: [] # list of build tags
+  tests: true # include tests
+  skip-dirs: [] # dirs to skip
+  skip-dirs-use-default: true # skip vendor, third_party, test_data
+  modules-download-mode: readonly # readonly|release|vendor
+
+output:
+  format: colored-line-number # colored-line-number|line-number|json|tab
+  print-issued-lines: true # print lines of code with issue
+  print-linter-name: true # print linter name in the end of issue text
+
+issues:
+  exclude: [] # list of regexps of issue texts to exclude
+  exclude-rules:
+    - path: _test\.go
+      linters:
+        - gosec
+        - funlen
+    - path: _test\.go
+      linters:
+        - gocritic
+      text: "unnecessaryBlock:"
+  exclude-use-default: false # use default exclude patterns
+  max-issues-per-linter: 0 # maximum issues count per one linter
+  max-same-issues: 0 # maximum issues count with same text
+  new: false # show only new issues
+  new-from-rev: "" # show only new issues created after git revision
+  new-from-patch: "" # show only new issues created in git patch
+
+linters:
+  disable-all: false
+  fast: false
+  presets: []
+  enable:
+    - asciicheck # Simple linter to check that your code does not contain non-ASCII identifiers
+    - bodyclose # Checks whether HTTP response body is closed successfully [fast: true, auto-fix: false]
+    - deadcode # Finds unused code [fast: true, auto-fix: false]
+    - depguard # Go linter that checks if package imports are in a list of acceptable packages [fast: true, auto-fix: false]
+    - dogsled # Checks assignments with too many blank identifiers (e.g. x, _, _, _, := f()) [fast: true, auto-fix: false]
+    - errcheck # Errcheck is a program for checking for unchecked errors in go programs. These unchecked errors can be critical bugs in some cases [fast: true, auto-fix: false]
+    - exhaustive # Check exhaustiveness of enum switch statements [fast: true, auto-fix: false]
+    - exportloopref # An analyzer that finds exporting pointers for loop variables. [fast: true, auto-fix: false]
+    - funlen # Tool for detection of long functions [fast: true, auto-fix: false]
+    - gocognit # Computes and checks the cognitive complexity of functions [fast: true, auto-fix: false]
+    - goconst # Finds repeated strings that could be replaced by a constant [fast: true, auto-fix: false]
+    - gocritic # The most opinionated Go source code linter [fast: true, auto-fix: false]
+    - gocyclo # Computes and checks the cyclomatic complexity of functions [fast: true, auto-fix: false]
+    - godox # Tool for detection of FIXME, TODO and other comment keywords [fast: true, auto-fix: false]
+    - godot # Check if comments end in a period [fast: true, auto-fix: true]
+    - goerr113 # Golang linter to check the errors handling expressions [fast: true, auto-fix: false]
+    - gofmt # Gofmt checks whether code was gofmt-ed. By default this tool runs with -s option to check for code simplification [fast: true, auto-fix: true]
+    - goimports # Goimports does everything that gofmt does. Additionally it checks unused imports [fast: true, auto-fix: true]
+    - golint # Golint differs from gofmt. Gofmt reformats Go source code, whereas golint prints out style mistakes [fast: true, auto-fix: false]
+    - goprintffuncname # Checks that printf-like functions are named with `f` at the end [fast: true, auto-fix: false]
+    - gosimple # Linter for Go source code that specializes in simplifying a code [fast: true, auto-fix: false]
+    - gosec # Inspects source code for security problems [fast: true, auto-fix: false]
+    - govet # Vet examines Go source code and reports suspicious constructs, such as Printf calls whose arguments do not align with the format string [fast: true, auto-fix: false]
+    - ineffassign # Detects when assignments to existing variables are not used [fast: true, auto-fix: false]
+    - interfacer # Linter that suggests narrower interface types [fast: true, auto-fix: false]
+    - lll # Reports long lines [fast: true, auto-fix: false]
+    - misspell # Finds commonly misspelled English words in comments [fast: true, auto-fix: true]
+    - nakedret # Finds naked returns in functions greater than a specified function length [fast: true, auto-fix: false]
+    - nestif # Reports deeply nested if statements [fast: true, auto-fix: false]
+    - noctx # Noctx finds sending http request without context.Context [fast: true, auto-fix: false]
+    - nolintlint # Reports ill-formed or insufficient nolint directives [fast: true, auto-fix: false]
+    - prealloc # Finds slice declarations that could potentially be preallocated [fast: true, auto-fix: false]
+    - rowserrcheck # Checks whether Err of rows is checked successfully [fast: true, auto-fix: false]
+    - staticcheck # Staticcheck is a go vet on steroids, applying a ton of static analysis checks [fast: true, auto-fix: false]
+    - structcheck # Finds unused struct fields [fast: true, auto-fix: false]
+    - scopelint # Scopelint checks for unpinned variables in go programs [fast: true, auto-fix: false]
+    - sqlclosecheck # Checks that sql.Rows and sql.Stmt are closed. [fast: true, auto-fix: false]
+    - stylecheck # Stylecheck is a replacement for golint [fast: true, auto-fix: false]
+    - typecheck # Like the front-end of a Go compiler, parses and type-checks Go code [fast: true, auto-fix: false]
+    - unconvert # Remove unnecessary type conversions [fast: true, auto-fix: false]
+    - unused # Checks Go code for unused constants, variables, functions and types [fast: false, auto-fix: false]
+    - unparam # Reports unused function parameters [fast: true, auto-fix: false]
+    - varcheck # Finds unused global variables and constants [fast: true, auto-fix: false]
+    - whitespace # Tool for detection of leading and trailing whitespace [fast: true, auto-fix: true]
+  disable:
+    - dupl # Tool for code clone detection [fast: true, auto-fix: false]
+    - gochecknoglobals # Checks that no globals are present in Go code [fast: true, auto-fix: false]
+    - gochecknoinits # Checks that no init functions are present in Go code [fast: true, auto-fix: false]
+    - gofumpt # Gofumpt checks whether code was gofumpt-ed. [fast: true, auto-fix: false]
+    - goheader # Checks is file header matches to pattern [fast: true, auto-fix: false]
+    - gomnd # An analyzer to detect magic numbers. [fast: true, auto-fix: false]
+    - gomodguard # Allow and block list linter for direct Go module dependencies.
+    - maligned # Tool to detect Go structs that would take less memory if their fields were sorted [fast: true, auto-fix: false]
+    - testpackage # Linter that makes you use a separate _test package [fast: true, auto-fix: false]
+    - wsl # Whitespace Linter - Forces you to use empty lines! [fast: true, auto-fix: false]
+
+linters-settings:
+  depguard:
+    list-type: blacklist
+    include-go-root: true
+    packages:
+    packages-with-error-messages:
+
+  dogsled:
+    max-blank-identifiers: 2
+
+  dupl:
+    threshold: 100 # tokens count to trigger issue
+
+  errcheck:
+    check-type-assertions: true # checking of errors in type assetions
+    check-blank: false # errors assignment to blank identifier
+
+  exhaustive:
+    default-signifies-exhaustive: true
+
+  funlen:
+    lines: 200
+    statements: 50
+
+  gocognit:
+    min-complexity: 12 # minimal code complexity to report
+
+  goconst:
+    min-len: 2
+    min-occurrences: 2
+
+  gocritic:
+    enabled-tags:
+      - diagnostic
+      - experimental
+      - opinionated
+      - performance
+      - style
+    enabled-checks: []
+    disabled-checks: []
+    settings:
+      hugeParam:
+        sizeThreshold: 512
+      rangeValCopy:
+        sizeThreshold: 512
+
+  gocyclo:
+    min-complexity: 12 # minimal code complexity to report
+
+  godox:
+    keywords:
+      - TODO
+      - FIXME
+
+  godot:
+    check-all: false
+
+  gofmt:
+    simplify: true
+
+  goheader:
+    values:
+      const:
+      # define here const type values in format k:v, for example:
+      # YEAR: 2020
+      # COMPANY: MY COMPANY
+      regexp:
+      # define here regexp type values, for example
+      # AUTHOR: .*@mycompany\.com
+    template:
+    #    {{ AUTHOR }} {{ COMPANY }} {{ YEAR }}
+    #    SPDX-License-Identifier: Apache-2.0
+    #
+    #    Licensed under the Apache License, Version 2.0 (the "License");
+    #    you may not use this file except in compliance with the License.
+    #    You may obtain a copy of the License at:
+    #
+    #      http://www.apache.org/licenses/LICENSE-2.0
+    #
+    #    Unless required by applicable law or agreed to in writing, software
+    #    distributed under the License is distributed on an "AS IS" BASIS,
+    #    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    #    See the License for the specific language governing permissions and
+    #    limitations under the License.
+    template-path:
+
+  goimports:
+    local-prefixes: git.kodix.dev/vgr/payments/gateway
+
+  golint:
+    min-confidency: 0
+
+  gomnd:
+    settings:
+      mnd:
+        checks: argument,case,condition,operation,return,assign
+
+  gomodguard:
+    allowed:
+      modules:
+      # - gopkg.in/yaml.v2
+      domains:
+      # - golang.org
+    blocked:
+      modules:
+      # - github.com/uudashr/go-module:
+      #     recommendations:
+      #       - golang.org/x/mod
+      #     reason: "`mod` is the official go.mod parser library."
+      versions:
+      # - github.com/mitchellh/go-homedir:
+      #     version: "< 1.1.0"
+      #     reason: "testing if blocked version constraint works."
+
+  govet:
+    check-shadowing: true
+    settings: {} # settings per analyzer
+    enable-all: false
+    enable:
+      - assign # check for useless assignments
+      - atomic # check for common mistakes using the sync/atomic package
+      - bools # check for common mistakes involving boolean operators
+      - buildtag # check that +build tags are well-formed and correctly located
+      - composites # check for unkeyed composite literals
+      - copylocks # check for locks erroneously passed by value
+      - errorsas # report passing non-pointer or non-error values to errors.As
+      - loopclosure # check references to loop variables from within nested functions
+      - lostcancel # check cancel func returned by context.WithCancel is called
+      - nilfunc # check for useless comparisons between functions and nil
+      - printf # check consistency of Printf format strings and arguments
+      - shift # check for shifts that equal or exceed the width of the integer
+      - stdmethods # check signature of methods of well-known interfaces
+      - structtag # check that struct field tags conform to reflect.StructTag.Get
+      - tests # check for common mistaken usages of tests and examples
+      - unmarshal # report passing non-pointer or non-interface values to unmarshal
+      - unreachable # check for unreachable code
+      - unsafeptr # check for invalid conversions of uintptr to unsafe.Pointer
+      - unusedresult # check for unused results of calls to some functions
+    disable-all: false
+    disable:
+      - asmdecl # report mismatches between assembly files and Go declarations
+      - cgocall # detect some violations of the cgo pointer passing rules
+      - httpresponse # check for mistakes using HTTP responses
+
+  lll:
+    line-height: 120
+    tab-width: 4
+
+  maligned:
+    suggest-new: true
+
+  misspell:
+    locale: US
+    ignore-words: []
+
+  nakedret:
+    max-func-lines: 10
+
+  nestif:
+    min-complexity: 3
+
+  nolintlint:
+    allow-unused: false
+    allow-leading-space: false
+    allow-no-explanation: []
+    require-explanation: true
+    require-specific: true
+
+  prealloc:
+    simple: true # loops that have no returns/breaks/continues/gotos
+    range-loops: true # preallocation suggestions on range loops
+    for-loops: true # preallocation suggestions on for loops
+
+  rowserrcheck:
+    packages:
+      - github.com/jmoiron/sqlx
+
+  testpackage:
+    skip-regexp:
+
+  unused:
+    check-exported: false
+
+  unparam:
+    check-exported: false
+
+  whitespace:
+    multi-if: true
+    multi-func: false
+
+  wsl:
+    strict-append: true
+    allow-assign-and-call: true
+    allow-multiline-assign: true
+    allow-trailing-comment: false
+    force-case-trailing-whitespace: 0
